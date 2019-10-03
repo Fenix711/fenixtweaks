@@ -1,0 +1,102 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+
+ext.configFile = file "build.properties"
+configFile.withReader {
+    def prop = new Properties()
+    prop.load(it)
+    ext.config = new ConfigSlurper().parse prop
+}
+
+// ----------------------------------------------------------------------------
+
+version = "${config.minecraftVersion}-${config.modVersion}"
+group = config.packageGroup
+archivesBaseName = config.modId
+
+compileJava.doFirst {
+    project.sourceSets.main.java.srcDirs.each { dir ->
+        copy {
+            from dir
+            into "${project.buildDir}/modifiedSrc"
+            include "**/*.java"
+            filter {
+                it.replaceAll('@@VERSION@@', config.modVersion)
+            }
+            filter {
+                if (config.modDependencies)
+                    it.replaceAll('//@@DEPENDENCIES@@', ", dependencies=${config.modDependencies}")
+            }
+            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+        }
+        println "   [OK] Preprocessed [${dir}]"
+    }
+}
+compileJava.doFirst {
+    source = "${project.buildDir}/modifiedSrc"
+    classpath = project.sourceSets.main.compileClasspath
+}
+compileJava.doLast {
+    println "   [OK] Compiled [${project.name}]"
+}
+
+sourceCompatibility = targetCompatibility = "1.8"
+compileJava {
+    sourceCompatibility = targetCompatibility = "1.8"
+}
+
+minecraft {
+    version = "${config.minecraftVersion}-${config.forgeVersion}"
+    runDir = "run"
+
+    mappings = config.mappings
+}
+
+repositories {
+
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    //
+}
+
+jar {
+    from sourceSets.api.output
+}
+
+processResources {
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "modVersion", project.version
+    inputs.property "minecraftVersion", project.minecraft.version
+
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        expand 'modId': config.modId, 'modName': config.modName, 'modDescription': config.modDescription, 'modVersion': config.modVersion, 'minecraftVersion': project.minecraft.version
+    }
+
+    // copy everything else, thats not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+/**
+ * This task creates the wrapper files.
+ */
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.1'
+}
+
