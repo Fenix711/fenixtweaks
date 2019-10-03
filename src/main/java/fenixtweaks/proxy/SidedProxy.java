@@ -1,4 +1,4 @@
-package template.proxy;
+package fenixtweaks.proxy;
 
 public class SidedProxy {
 

@@ -1,46 +1,34 @@
-package template;
+package fenixtweaks;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.*;
 
 @SuppressWarnings("unused")
 @Mod(
-    modid = ModTemplate.MOD_ID,
-    version = ModTemplate.VERSION,
-    name = ModTemplate.NAME
+    modid = ModFenixTweaks.MOD_ID,
+    version = ModFenixTweaks.VERSION,
+    name = ModFenixTweaks.NAME
     //@@DEPENDENCIES@@
 )
-public class ModTemplate {
+public class ModFenixTweaks {
 
-  public static final String MOD_ID = "template";
+  public static final String MOD_ID = "fenixtweaks";
   public static final String VERSION = "@@VERSION@@";
-  public static final String NAME = "Template";
+  public static final String NAME = "FenixTweaks";
 
-  private static final String PROXY_SERVER = "template.proxy.SidedProxy";
-  private static final String PROXY_CLIENT = "template.proxy.SidedProxyClient";
+  private static final String PROXY_SERVER = "fenixtweaks.proxy.SidedProxy";
+  private static final String PROXY_CLIENT = "fenixtweaks.proxy.SidedProxyClient";
 
   @SuppressWarnings("unused")
   @Mod.Instance
-  public static ModTemplate INSTANCE;
+  public static ModFenixTweaks INSTANCE;
 
   @net.minecraftforge.fml.common.SidedProxy(
       modId = MOD_ID,
       serverSide = PROXY_SERVER,
       clientSide = PROXY_CLIENT
   )
-  public static template.proxy.SidedProxy PROXY;
-
-  public static final CreativeTabs CREATIVE_TAB = new CreativeTabs(MOD_ID) {
-
-    @Override
-    public ItemStack getTabIconItem() {
-
-      return new ItemStack(Items.STICK);
-    }
-  };
+  public static fenixtweaks.proxy.SidedProxy PROXY;
 
   @Mod.EventHandler
   public void onConstructionEvent(FMLConstructionEvent event) {

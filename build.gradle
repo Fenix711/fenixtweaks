@@ -19,6 +19,12 @@ configFile.withReader {
 
 // ----------------------------------------------------------------------------
 
+//project.ext.dependencies = ',dependencies = "' +
+//        //'required-after:athenaeum@[' + config.athenaeumVersion + ',);' +
+//        '"'
+
+project.ext.dependencies = ""
+
 version = "${config.minecraftVersion}-${config.modVersion}"
 group = config.packageGroup
 archivesBaseName = config.modId
@@ -34,7 +40,7 @@ compileJava.doFirst {
             }
             filter {
                 if (config.modDependencies)
-                    it.replaceAll('//@@DEPENDENCIES@@', ", dependencies=${config.modDependencies}")
+                    it.replaceAll('//@@DEPENDENCIES@@', "${project.ext.dependencies}")
             }
             duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         }
@@ -69,7 +75,7 @@ repositories {
 }
 
 dependencies {
-    //
+//    compile project(":athenaeum")
 }
 
 jar {

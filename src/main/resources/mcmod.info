@@ -7,7 +7,7 @@
   "mcversion": "${minecraftVersion}",
   "url": "",
   "updateUrl": "",
-  "authorList": [],
+  "authorList": [codetaylor],
   "credits": "",
   "logoFile": "",
   "screenshots": [],
