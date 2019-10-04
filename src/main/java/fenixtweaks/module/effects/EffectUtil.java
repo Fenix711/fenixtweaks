@@ -1,8 +1,8 @@
-package fenixtweaks;
+package fenixtweaks.module.effects;
 
 import net.minecraft.potion.PotionEffect;
 
-public final class Util {
+public final class EffectUtil {
 
   public static PotionEffect duplicatePotionEffect(PotionEffect activePotionEffect) {
 
@@ -15,7 +15,7 @@ public final class Util {
     );
   }
 
-  private Util() {
+  private EffectUtil() {
     //
   }
 }

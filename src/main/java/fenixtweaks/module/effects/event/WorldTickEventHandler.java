@@ -1,7 +1,7 @@
-package fenixtweaks.event;
+package fenixtweaks.module.effects.event;
 
-import fenixtweaks.ModFenixTweaksConfig;
-import fenixtweaks.Util;
+import fenixtweaks.module.effects.ModuleEffectsConfig;
+import fenixtweaks.module.effects.EffectUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -46,11 +46,11 @@ public class WorldTickEventHandler {
 
         String resourceLocationString = resourceLocation.toString();
 
-        for (String effect : ModFenixTweaksConfig.EFFECTS) {
+        for (String effect : ModuleEffectsConfig.EFFECTS) {
 
           if (resourceLocationString.equals(effect)
               && activePotionEffect.getDuration() < Integer.MAX_VALUE) {
-            playerEntity.addPotionEffect(Util.duplicatePotionEffect(activePotionEffect));
+            playerEntity.addPotionEffect(EffectUtil.duplicatePotionEffect(activePotionEffect));
             break;
           }
         }

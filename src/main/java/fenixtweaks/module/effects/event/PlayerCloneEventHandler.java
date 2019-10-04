@@ -1,7 +1,7 @@
-package fenixtweaks.event;
+package fenixtweaks.module.effects.event;
 
-import fenixtweaks.ModFenixTweaksConfig;
-import fenixtweaks.Util;
+import fenixtweaks.module.effects.ModuleEffectsConfig;
+import fenixtweaks.module.effects.EffectUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -36,10 +36,10 @@ public class PlayerCloneEventHandler {
         if (resourceLocation != null) {
           String resourceLocationString = resourceLocation.toString();
 
-          for (String effect : ModFenixTweaksConfig.EFFECTS) {
+          for (String effect : ModuleEffectsConfig.EFFECTS) {
 
             if (resourceLocationString.equals(effect)) {
-              newEntity.addPotionEffect(Util.duplicatePotionEffect(activePotionEffect));
+              newEntity.addPotionEffect(EffectUtil.duplicatePotionEffect(activePotionEffect));
               break;
             }
           }
