@@ -61,7 +61,7 @@ public final class PointPoolInitializer {
 
         // Register the adapted pool
         String name = modPath.relativize(path).toString();
-        pointPool.setRegistryName(ModFenixTweaks.MOD_ID, name);
+        pointPool.setRegistryName(ModFenixTweaks.MOD_ID, name.substring(0, name.length() - 5));
         ModulePools.Registries.POINT_POOLS.register(pointPool);
         MinecraftForge.EVENT_BUS.register(pointPool);
         logger.info("Registered point pool: " + pointPool.getRegistryName());
