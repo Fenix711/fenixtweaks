@@ -1,5 +1,6 @@
 package fenixtweaks;
 
+import fenixtweaks.module.pools.ModulePools;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.*;
 
@@ -37,7 +38,8 @@ public class ModFenixTweaks {
 
   @Mod.EventHandler
   public void onPreInitializationEvent(FMLPreInitializationEvent event) {
-    //
+
+    ModulePools.onPreInitialization(event);
   }
 
   @Mod.EventHandler
