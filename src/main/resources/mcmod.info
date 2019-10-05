@@ -1,14 +1,14 @@
 [
 {
-  "modid": "${modId}",
-  "name": "${modName}",
-  "description": "${modDescription}",
+  "modid": "fenixtweaks",
+  "name": "FenixTweaks",
+  "description": "A utility mod for manipulating point pools on players.",
   "version": "${modVersion}",
   "mcversion": "${minecraftVersion}",
   "url": "",
   "updateUrl": "",
-  "authorList": [codetaylor],
-  "credits": "",
+  "authorList": [fenix,codetaylor],
+  "credits": "Commissioned by Fenix, written by codetaylor",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

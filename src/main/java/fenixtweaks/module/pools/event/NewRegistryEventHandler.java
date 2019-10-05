@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = ModFenixTweaks.MOD_ID)
 public class NewRegistryEventHandler {
 
   @SubscribeEvent

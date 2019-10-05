@@ -1,7 +1,8 @@
 package fenixtweaks.module.effects.event;
 
-import fenixtweaks.module.effects.ModuleEffectsConfig;
+import fenixtweaks.ModFenixTweaks;
 import fenixtweaks.module.effects.EffectUtil;
+import fenixtweaks.module.effects.ModuleEffectsConfig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -12,7 +13,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Collection;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = ModFenixTweaks.MOD_ID)
 public class PlayerCloneEventHandler {
 
   /**

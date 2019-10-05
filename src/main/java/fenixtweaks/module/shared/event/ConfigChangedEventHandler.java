@@ -1,4 +1,4 @@
-package fenixtweaks.module.pools.event;
+package fenixtweaks.module.shared.event;
 
 import fenixtweaks.ModFenixTweaks;
 import net.minecraftforge.common.config.Config;
@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class ConfigChangedEventHandler {
 
   @SubscribeEvent
-  public static void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
+  public static void on(ConfigChangedEvent.OnConfigChangedEvent event) {
 
     if (event.getModID().equals(ModFenixTweaks.MOD_ID)) {
       ConfigManager.sync(ModFenixTweaks.MOD_ID, Config.Type.INSTANCE);

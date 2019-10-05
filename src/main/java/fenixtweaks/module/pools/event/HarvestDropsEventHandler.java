@@ -1,11 +1,12 @@
 package fenixtweaks.module.pools.event;
 
+import fenixtweaks.ModFenixTweaks;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = ModFenixTweaks.MOD_ID)
 public class HarvestDropsEventHandler {
 
   @SubscribeEvent
