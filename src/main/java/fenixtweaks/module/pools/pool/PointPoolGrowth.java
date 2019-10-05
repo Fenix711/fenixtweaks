@@ -2,22 +2,29 @@ package fenixtweaks.module.pools.pool;
 
 public class PointPoolGrowth {
 
-  private final double base;
-  private final EnumGrowthType type;
+  private double slope;
+  private double exponent;
+  private double intercept;
 
-  public PointPoolGrowth(double base, EnumGrowthType type) {
+  public PointPoolGrowth() {
 
-    this.base = base;
-    this.type = type;
+    this.slope = 1;
+    this.exponent = 1;
+    this.intercept = 0;
   }
 
-  public double getBase() {
+  public double getSlope() {
 
-    return this.base;
+    return this.slope;
   }
 
-  public EnumGrowthType getType() {
+  public double getExponent() {
 
-    return this.type;
+    return this.exponent;
+  }
+
+  public double getIntercept() {
+
+    return this.intercept;
   }
 }

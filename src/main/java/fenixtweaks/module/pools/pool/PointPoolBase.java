@@ -82,9 +82,9 @@ public abstract class PointPoolBase
    * <p>
    * Do not use this method with negative numbers.
    *
-   * @param player
-   * @param levels
-   * @return
+   * @param player the player
+   * @param levels the levels to remove (positive number)
+   * @return the new level total
    */
   public int removeLevels(EntityPlayer player, int levels) {
 
@@ -230,8 +230,10 @@ public abstract class PointPoolBase
    */
   public double getPointsForLevel(int level) {
 
-    // TODO: growth
-    return level * this.growth.getBase();
+    double slope = this.growth.getSlope();
+    double exponent = this.growth.getExponent();
+    double intercept = this.growth.getIntercept();
+    return slope * Math.pow(level, exponent) + intercept;
   }
 
   /**
