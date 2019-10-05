@@ -1,2 +1,15 @@
-message.fenixtweaks.level.up=You have reached level %d in %s!
-message.fenixtweaks.points=You gained %d points in %s!
+commands.fenixtweaks.fail.pool=Can't find the given <pool>: %s
+
+commands.fenixtweaks.ftpoints.usage=/ftpoints <pool> [amount] [player] OR /ftpoints <pool> [amount]L [player]
+commands.fenixtweaks.ftpoints.fail.amount=Invalid number for the <amount>: %s
+commands.fenixtweaks.ftpoints.message.points.added=Added %d points to player %s
+commands.fenixtweaks.ftpoints.message.points.removed=Removed %d points from player %s
+commands.fenixtweaks.ftpoints.message.levels.added=Added %d levels to player %s
+commands.fenixtweaks.ftpoints.message.levels.removed=Removed %d levels from player %s
+
+commands.fenixtweaks.ftshow.usage=/ftshow <pool>|all [player]
+
+message.fenixtweaks.levels.gained=You have reached level %d in %s!
+message.fenixtweaks.levels.lost=You have been demoted to level %d in %s!
+message.fenixtweaks.points.gained=You gained %d points in %s!
+message.fenixtweaks.points.lost=You lost %d points in %s!

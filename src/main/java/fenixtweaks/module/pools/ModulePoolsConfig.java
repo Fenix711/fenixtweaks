@@ -23,4 +23,9 @@ public class ModulePoolsConfig {
       "Default: " + false
   })
   public static boolean CHAT_POINT_MESSAGE = true;
+
+  @Config.Comment({
+      "Set to true to allow everyone to use the command to display"
+  })
+  public static boolean COMMAND_ALLOW_EVERYONE_SHOW = false;
 }

@@ -32,28 +32,173 @@ public abstract class PointPoolBase
     this.goals = goals;
   }
 
+  public String getName() {
+
+    return this.name;
+  }
+
   /**
-   * Awards points to the player for this point pool and checks for level up.
-   * If the player has leveled up, the goals are triggered.
-   * <p>
-   * Do not use this method to remove points.
+   * Returns the levels for the given player or -1 if the player entity doesn't
+   * have the correct capability.
    *
    * @param player the player
-   * @param points the points to add
+   * @return the levels for the given player
    */
-  protected void addPoints(EntityPlayer player, double points) {
+  public int getLevels(EntityPlayer player) {
 
     IPointPoolPlayerData capability = CapabilityPointPools.get(player);
 
     if (capability == null) {
-      return;
+      return -1;
+    }
+
+    ResourceLocation resourceLocation = this.getRegistryName();
+    return capability.getLevels(resourceLocation);
+  }
+
+  /**
+   * Returns the points for the given player or -1 if the player entity doesn't
+   * have the correct capability.
+   *
+   * @param player the player
+   * @return the points for the given player
+   */
+  public double getPoints(EntityPlayer player) {
+
+    IPointPoolPlayerData capability = CapabilityPointPools.get(player);
+
+    if (capability == null) {
+      return -1;
+    }
+
+    ResourceLocation resourceLocation = this.getRegistryName();
+    return capability.getPoints(resourceLocation);
+  }
+
+  /**
+   * Remove levels from the given player.
+   * <p>
+   * Does not trigger goals.
+   * <p>
+   * Do not use this method with negative numbers.
+   *
+   * @param player
+   * @param levels
+   * @return
+   */
+  public int removeLevels(EntityPlayer player, int levels) {
+
+    if (levels < 0) {
+      throw new IllegalArgumentException("This method doesn't support a negative value for levels");
+    }
+
+    IPointPoolPlayerData capability = CapabilityPointPools.get(player);
+
+    if (capability == null) {
+      return levels;
+    }
+
+    ResourceLocation resourceLocation = this.getRegistryName();
+    int result = capability.addLevels(resourceLocation, -levels);
+
+    if (ModulePoolsConfig.CHAT_POINT_MESSAGE || ModulePoolsConfig.CHAT_DEBUG_OUTPUT) {
+      player.sendMessage(new TextComponentTranslation("message.fenixtweaks.levels.lost", result, this.name));
+    }
+
+    return result;
+  }
+
+  /**
+   * Add levels to the player.
+   * <p>
+   * Does not trigger goals.
+   * <p>
+   * Do not use this method with negative numbers.
+   *
+   * @param player the player
+   * @param levels the levels to add
+   * @return the new level total
+   */
+  public int addLevels(EntityPlayer player, int levels) {
+
+    if (levels < 0) {
+      throw new IllegalArgumentException("This method doesn't support a negative value for levels");
+    }
+
+    IPointPoolPlayerData capability = CapabilityPointPools.get(player);
+
+    if (capability == null) {
+      return levels;
+    }
+
+    ResourceLocation resourceLocation = this.getRegistryName();
+    int result = capability.addLevels(resourceLocation, levels);
+
+    if (ModulePoolsConfig.CHAT_POINT_MESSAGE || ModulePoolsConfig.CHAT_DEBUG_OUTPUT) {
+      player.sendMessage(new TextComponentTranslation("message.fenixtweaks.levels.gained", result, this.name));
+    }
+
+    return result;
+  }
+
+  /**
+   * Removes points from the player.
+   * <p>
+   * Do not use this method with negative numbers.
+   *
+   * @param player the player
+   * @param points the points to remove (positive number)
+   * @return the new point total
+   */
+  public double removePoints(EntityPlayer player, double points) {
+
+    if (points < 0) {
+      throw new IllegalArgumentException("This method doesn't support a negative value for points");
+    }
+
+    IPointPoolPlayerData capability = CapabilityPointPools.get(player);
+
+    if (capability == null) {
+      return points;
+    }
+
+    ResourceLocation resourceLocation = this.getRegistryName();
+    double result = capability.addPoints(resourceLocation, -points);
+
+    if (ModulePoolsConfig.CHAT_POINT_MESSAGE || ModulePoolsConfig.CHAT_DEBUG_OUTPUT) {
+      player.sendMessage(new TextComponentTranslation("message.fenixtweaks.points.lost", points, this.name));
+    }
+
+    return result;
+  }
+
+  /**
+   * Awards points to the player for this point pool and checks for level up.
+   * If the player has leveled up, the goals are triggered.
+   * <p>
+   * Do not use this method with negative numbers.
+   *
+   * @param player the player
+   * @param points the points to add
+   * @return the new point total
+   */
+  public double addPoints(EntityPlayer player, double points) {
+
+    if (points < 0) {
+      throw new IllegalArgumentException("This method doesn't support a negative value for points");
+    }
+
+    IPointPoolPlayerData capability = CapabilityPointPools.get(player);
+
+    if (capability == null) {
+      return points;
     }
 
     ResourceLocation resourceLocation = this.getRegistryName();
     double pointTotal = capability.addPoints(resourceLocation, points);
 
     if (ModulePoolsConfig.CHAT_POINT_MESSAGE || ModulePoolsConfig.CHAT_DEBUG_OUTPUT) {
-      player.sendMessage(new TextComponentTranslation("message.fenixtweaks.points", points, this.name));
+      player.sendMessage(new TextComponentTranslation("message.fenixtweaks.points.gained", points, this.name));
     }
 
     int levels = capability.getLevels(resourceLocation);
@@ -66,13 +211,15 @@ public abstract class PointPoolBase
         pointTotal = capability.addPoints(resourceLocation, -pointsForNextLevel);
         levels = capability.addLevels(resourceLocation, 1);
 
-        if (ModulePoolsConfig.CHAT_LEVEL_MESSAGE || ModulePoolsConfig.CHAT_DEBUG_OUTPUT) {
-          player.sendMessage(new TextComponentTranslation("message.fenixtweaks.level.up", capability.getLevels(resourceLocation), this.name));
-        }
-
         this.triggerGoals(player, levels);
       }
+
+      if (ModulePoolsConfig.CHAT_LEVEL_MESSAGE || ModulePoolsConfig.CHAT_DEBUG_OUTPUT) {
+        player.sendMessage(new TextComponentTranslation("message.fenixtweaks.levels.gained", capability.getLevels(resourceLocation), this.name));
+      }
     }
+
+    return pointTotal;
   }
 
   /**
@@ -81,7 +228,7 @@ public abstract class PointPoolBase
    * @param level the level
    * @return the points needed for the given level
    */
-  protected double getPointsForLevel(int level) {
+  public double getPointsForLevel(int level) {
 
     // TODO: growth
     return level * this.growth.getBase();
