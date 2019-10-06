@@ -1,0 +1,16 @@
+site_name: FenixTweaks
+
+pages:
+- Introduction: index.md
+- Commands: commands.md
+- Pools:
+    - Pools: pools/pools.md
+    - Structure: pools/structure.md
+- Pool Types:
+    - Block Harvest: pool-types/block-harvest.md
+
+theme: readthedocs
+
+markdown_extensions:
+- admonition
+- codehilite
