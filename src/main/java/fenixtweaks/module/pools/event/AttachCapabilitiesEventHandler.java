@@ -51,8 +51,12 @@ public class AttachCapabilitiesEventHandler {
     @Override
     public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
 
-      //noinspection unchecked
-      return (T) this.data;
+      if (capability == CapabilityPointPools.POINT_POOLS) {
+        //noinspection unchecked
+        return (T) this.data;
+      }
+
+      return null;
     }
 
     @Override
