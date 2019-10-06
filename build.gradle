@@ -17,6 +17,17 @@ configFile.withReader {
     ext.config = new ConfigSlurper().parse prop
 }
 
+def getVersionName = { String workTree ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', "--git-dir=\"${workTree}/.git\"", "--work-tree=\"${workTree}\"", 'describe', '--tags'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
+
+project.ext.modVersion = getVersionName("${project.projectDir}")
+
 // ----------------------------------------------------------------------------
 
 //project.ext.dependencies = ',dependencies = "' +
@@ -25,7 +36,7 @@ configFile.withReader {
 
 project.ext.dependencies = ""
 
-version = "${config.minecraftVersion}-${config.modVersion}"
+version = "${config.minecraftVersion}-${project.ext.modVersion}"
 group = config.packageGroup
 archivesBaseName = config.modId
 
@@ -89,7 +100,7 @@ processResources {
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-        expand 'modId': config.modId, 'modName': config.modName, 'modDescription': config.modDescription, 'modVersion': config.modVersion, 'minecraftVersion': project.minecraft.version
+        expand 'modId': config.modId, 'modName': config.modName, 'modDescription': config.modDescription, 'modVersion': project.ext.modVersion, 'minecraftVersion': project.minecraft.version
     }
 
     // copy everything else, thats not the mcmod.info
