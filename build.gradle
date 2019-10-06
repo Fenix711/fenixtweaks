@@ -20,7 +20,7 @@ configFile.withReader {
 // ----------------------------------------------------------------------------
 
 //project.ext.dependencies = ',dependencies = "' +
-//        //'required-after:athenaeum@[' + config.athenaeumVersion + ',);' +
+//        'required-after:athenaeum@[' + config.athenaeumVersion + ',);' +
 //        '"'
 
 project.ext.dependencies = ""
@@ -36,11 +36,10 @@ compileJava.doFirst {
             into "${project.buildDir}/modifiedSrc"
             include "**/*.java"
             filter {
-                it.replaceAll('@@VERSION@@', config.modVersion)
+                it.replaceAll('@@VERSION@@', project.version)
             }
             filter {
-                if (config.modDependencies)
-                    it.replaceAll('//@@DEPENDENCIES@@', "${project.ext.dependencies}")
+                it.replaceAll('//@@DEPENDENCIES@@', "${project.ext.dependencies}")
             }
             duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         }
