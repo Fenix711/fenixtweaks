@@ -41,7 +41,7 @@ The `data` parameter is going to be different depending on the `type` of the poi
 
 This object defines parameters for the function used to determine how many points are required for each level. 
 
-We use the formula `y = m * x^p + b` to define a point pool's level growth.
+FenixTweaks uses the formula `y = m * x^p + b` to define a point pool's level growth.
 
 ```
 points = slope * level ^ exponent + intercept
