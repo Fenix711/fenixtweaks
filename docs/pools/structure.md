@@ -31,6 +31,8 @@ The `type` parameter is a pre-defined string that identifies the type of point p
 
 The `name` parameter is used as a display name for the point pool in chat messages.
 
+Minecraft color codes can be used, but instead of using `&` as the control character, use `§`.
+
 ### Data
 
 **Required**
