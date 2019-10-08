@@ -197,7 +197,7 @@ public abstract class PointPoolBase
     ResourceLocation resourceLocation = this.getRegistryName();
     double pointTotal = capability.addPoints(resourceLocation, points);
 
-    if (ModulePoolsConfig.CHAT_POINT_MESSAGE || ModulePoolsConfig.CHAT_DEBUG_OUTPUT) {
+    if (ModulePoolsConfig.CHAT_POINT_MESSAGE) {
       player.sendMessage(new TextComponentTranslation("message.fenixtweaks.points.gained", points, this.name));
     }
 
@@ -214,9 +214,13 @@ public abstract class PointPoolBase
         this.triggerGoals(player, levels);
       }
 
-      if (ModulePoolsConfig.CHAT_LEVEL_MESSAGE || ModulePoolsConfig.CHAT_DEBUG_OUTPUT) {
+      if (ModulePoolsConfig.CHAT_LEVEL_MESSAGE) {
         player.sendMessage(new TextComponentTranslation("message.fenixtweaks.levels.gained", capability.getLevels(resourceLocation), this.name));
       }
+    }
+
+    if (ModulePoolsConfig.CHAT_POINT_TOTAL_MESSAGE) {
+      player.sendMessage(new TextComponentTranslation("message.fenixtweaks.points.total", pointTotal, pointsForNextLevel));
     }
 
     return pointTotal;
