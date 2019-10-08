@@ -13,6 +13,6 @@ public class ModuleEffectsConfig {
       "The expected format is: (domain):(path)",
       "For example: minecraft:regeneration"
   })
-  public static String[] EFFECTS = new String[]{"minecraft:regeneration"};
+  public static String[] EFFECTS = new String[]{};
 
 }
