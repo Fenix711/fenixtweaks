@@ -39,12 +39,13 @@ public class ModFenixTweaks {
   @Mod.EventHandler
   public void onPreInitializationEvent(FMLPreInitializationEvent event) {
 
-    ModulePools.on(event);
+    ModulePools.onPreInitialization(event);
   }
 
   @Mod.EventHandler
   public void onInitializationEvent(FMLInitializationEvent event) {
-    //
+
+    ModulePools.onInitialization(event);
   }
 
   @Mod.EventHandler
@@ -65,7 +66,7 @@ public class ModFenixTweaks {
   @Mod.EventHandler
   public void onServerStartingEvent(FMLServerStartingEvent event) {
 
-    ModulePools.on(event);
+    ModulePools.onServerStarting(event);
   }
 
   @Mod.EventHandler

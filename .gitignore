@@ -27,3 +27,4 @@ run
 *.log
 cloc-1.80.exe
 docs.zip
+/libs/

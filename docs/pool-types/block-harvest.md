@@ -7,13 +7,15 @@ The data for this pool type looks like this:
 ```ts
 "data": {
   "points": {
-    String: int,
+    String: double,
     ...
   }
 }
 ```
 
 The `String` key in the `points` object is a block string that defines an in-world block state to match in the form `<domain>:<path>:<meta>` where `<meta>` can be a wildcard: `*`.
+
+The `double` defines the number of points to be awarded for harvesting the block.
 
 !!! warning
     Block strings describe an in-world block state, not an item stack, and can deviate from what you would expect.

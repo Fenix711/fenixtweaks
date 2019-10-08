@@ -4,8 +4,10 @@ import com.google.gson.JsonElement;
 import fenixtweaks.ModFenixTweaks;
 import fenixtweaks.module.pools.ModulePools;
 import fenixtweaks.module.pools.pool.*;
+import fenixtweaks.module.pools.pool.impl.MSDamageDealtPool;
 import fenixtweaks.module.pools.pool.impl.BlockHarvestPool;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.Loader;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
@@ -46,6 +48,11 @@ public final class PointPoolInitializer {
     // Register adapters
     Map<String, IPointPoolJsonElementAdapter<? extends PointPoolBase>> adapterMap = new HashMap<>();
     adapterMap.put(EnumPointPoolType.BlockHarvest.getName(), new BlockHarvestPool.Adapter());
+
+    if (Loader.isModLoaded("mmorpg")) {
+      adapterMap.put(EnumPointPoolType.MSDamageDealt.getName(), new MSDamageDealtPool.Adapter());
+    }
+
     PointPoolAdapter adapter = new PointPoolAdapter(adapterMap);
 
     // Locate the json files

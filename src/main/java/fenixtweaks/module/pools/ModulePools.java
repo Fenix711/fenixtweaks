@@ -5,23 +5,32 @@ import fenixtweaks.module.pools.command.CommandShow;
 import fenixtweaks.module.pools.init.PlayerDataCapabilityInitializer;
 import fenixtweaks.module.pools.init.PointPoolInitializer;
 import fenixtweaks.module.pools.pool.PointPoolBase;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
+
 public class ModulePools {
 
   private static final Logger LOGGER = LogManager.getLogger(ModulePools.class);
+  private static File modConfigurationDirectory;
 
-  public static void on(FMLPreInitializationEvent event) {
+  public static void onPreInitialization(FMLPreInitializationEvent event) {
 
     PlayerDataCapabilityInitializer.initialize();
-    PointPoolInitializer.initialize(event.getModConfigurationDirectory(), LOGGER);
+    modConfigurationDirectory = event.getModConfigurationDirectory();
   }
 
-  public static void on(FMLServerStartingEvent event) {
+  public static void onInitialization(FMLInitializationEvent event) {
+
+    PointPoolInitializer.initialize(modConfigurationDirectory, LOGGER);
+  }
+
+  public static void onServerStarting(FMLServerStartingEvent event) {
 
     event.registerServerCommand(new CommandPoints());
     event.registerServerCommand(new CommandShow());

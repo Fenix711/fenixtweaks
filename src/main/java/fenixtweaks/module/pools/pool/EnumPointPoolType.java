@@ -2,7 +2,8 @@ package fenixtweaks.module.pools.pool;
 
 public enum EnumPointPoolType {
 
-  BlockHarvest("block_harvest");
+  BlockHarvest("block_harvest"),
+  MSDamageDealt("ms_damage_dealt");
 
   private final String name;
 
