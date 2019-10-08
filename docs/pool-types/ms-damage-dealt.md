@@ -16,9 +16,9 @@ The data for this pool type looks like this:
 
 The `String` key in the `points` object is an item string that defines a held item to match in the form `<domain>:<path>:<meta>` where `<meta>` *should* be a wildcard: `*`.
 
-The `double` defines the number of points to be awarded for harvesting the block.
+The `double` defines the number of points to be awarded for each point of damage done.
 
-If the player deals damage with an item that is not specified in the list, the points awarded defaults to `1` and can be overridden by supplying a value for `default`.  
+If the player deals damage with an item that is not specified in the list, the points awarded per point of damage done defaults to `1` and can be overridden by supplying a value for `default`.  
 
 !!! warning
     If your item takes damage, don't forget to set the meta to `*`.
@@ -30,7 +30,7 @@ In this example, dealing damage with a `mmorpg:sword/sword0` awards `3` points p
 ```js
 "data": {
   "points": {
-    "mmorpg:sword/sword0": 3
+    "mmorpg:sword/sword0:*": 3
   },
   "default": 2
 }
@@ -46,7 +46,7 @@ This is what a `ms_damage_dealt` point pool might look like:
   "name": "Damage Dealt",
   "data": {
     "points": {
-      "mmorpg:sword/sword0": 3
+      "mmorpg:sword/sword0:*": 3
     },
     "default": 2
   },
