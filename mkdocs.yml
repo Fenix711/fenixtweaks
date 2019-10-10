@@ -2,7 +2,9 @@ site_name: FenixTweaks
 
 pages:
 - Introduction: index.md
+- Changelog: changelog.md
 - Commands: commands.md
+- Effect Persistence: effects.md
 - Pools:
     - Pools: pools/pools.md
     - Structure: pools/structure.md
