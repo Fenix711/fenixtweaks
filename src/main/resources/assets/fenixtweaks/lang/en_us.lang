@@ -13,4 +13,4 @@ message.fenixtweaks.levels.gained=You have reached level %d in %s!
 message.fenixtweaks.levels.lost=You have been demoted to level %d in %s!
 message.fenixtweaks.points.gained=You gained %d points in %s!
 message.fenixtweaks.points.lost=You lost %d points in %s!
-message.fenixtweaks.points.total=Total Points: %d / %d
+message.fenixtweaks.points.total= You gained %d / %d points in %s!
